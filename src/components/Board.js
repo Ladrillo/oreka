@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Cell from './Cell';
 import { formatLine } from '../services/utils';
+import generateBoard from '../services/generateBoard';
 
 
 const StyledBoard = styled.div`
@@ -26,19 +27,24 @@ export default class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      board: [
-        [{value: 'A'}, {value: 'B'}, {value: 'A'}],
-        [{value: 'B'}, {value: 'A'}, {value: 'B'}],
-        [{value: 'A'}, {value: 'B'}, {value: 'A'}],
-      ],
+      board: null,
       size: {
         x: 10, y: 10
       }
     };
   }
 
+  clickHandler(e) {
+    const board = generateBoard();
+    this.setState({ board });
+  }
+
   render() {
     const { board, size } = this.state;
+
+    if (!board || !board.length) {
+      return <button onClick={this.clickHandler.bind(this)}>generate board</button>;
+    }
 
     return (
       <StyledBoard board={board} size={size}>
