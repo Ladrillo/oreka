@@ -11,10 +11,10 @@ const StyledCell = styled.div`
   font-weight: bold;
 `;
 
-export default function Cell({ x, y, value }) {
+export default function Cell({ x, y, item }) {
   return (
-    <StyledCell value={value}>
-      {value}
+    <StyledCell value={item.value}>
+      {item.value}
     </StyledCell>
   );
 }

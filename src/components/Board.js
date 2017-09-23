@@ -27,13 +27,12 @@ export default class Board extends React.Component {
     super(props);
     this.state = {
       board: [
-        ['A', 'A', 'B'],
-        ['B', 'A', 'B'],
-        ['B', 'B', 'A'],
-        ['B', 'B', 'A'],
+        [{value: 'A'}, {value: 'B'}, {value: 'A'}],
+        [{value: 'B'}, {value: 'A'}, {value: 'B'}],
+        [{value: 'A'}, {value: 'B'}, {value: 'A'}],
       ],
       size: {
-        x: 10, y: 5
+        x: 10, y: 10
       }
     };
   }
@@ -46,7 +45,7 @@ export default class Board extends React.Component {
         {
           board.map((row, y) => (
             row.map((cell, x) => (
-              <Cell x={x} y={y} value={board[y][x]} />
+              <Cell x={x} y={y} item={board[y][x]} />
             ))
           ))
         }
