@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Board from './components/Board';
-import logo from './logo.svg';
-import './App.css';
+import Game from './components/Game';
 
-const StyledApp = styled.div`
-
-`;
-
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
-      <StyledApp className="App">
-        <Board />
-      </StyledApp>
+      <Game></Game>
     );
   }
 }
-
-export default App;
