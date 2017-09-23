@@ -13,13 +13,13 @@ export default class Game extends Component {
     this.state = {
       board: null,
       size: {
-        x: 10, y: 10
+        x: 20, y: 20
       }
     };
   }
 
   generateHandler(e) {
-    const board = generateBoard();
+    const board = generateBoard(5, 5);
     this.setState({ board });
   }
 
