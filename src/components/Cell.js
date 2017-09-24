@@ -4,7 +4,9 @@ import styled from 'styled-components';
 
 const StyledCell = styled.div`
   background-color: ${pr => {
-    if (pr.cell) return behaviorColor[pr.cell.strategy];
+    if (pr.cell) {
+      return behaviorColor[pr.cell.strategy];
+    }
     return behaviorColor.empty;
   }};
 

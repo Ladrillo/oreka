@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Cell from './Cell';
-import { formatLine } from '../services/utils';
+import { formatLine } from '../services/cssHelpers';
 
 
 const StyledBoard = styled.div`

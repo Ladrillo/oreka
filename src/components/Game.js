@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Board from './Board';
 import generateBoard from '../services/generateBoard';
-import { calculateVisible } from '../services/utils';
+import calculateVisibles from '../services/calculateVisibles';
 
-const StyledGame = styled.div`
-
-`;
 
 export default class Game extends Component {
   constructor(props) {
@@ -22,26 +19,26 @@ export default class Game extends Component {
     };
     this.generateHandler = this.generateHandler.bind(this);
     this.destroyHandler = this.destroyHandler.bind(this);
-    this.visibleCells = this.visibleCells.bind(this);
     this.runGame = this.runGame.bind(this);
   }
 
-  visibleCells() {
-    const { board } = this.state;
-    const { columns, rows } = this.state.boardConfig;
+  runGame() {
+    const { board, boardConfig } = this.state;
+    const { columns, rows } = boardConfig;
 
+    // MAIN GAME LOOP
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < columns; x++) {
+
+        // EMPIEZA LA FIESTA
         if (board[y][x]) {
-          board[y][x].visibles = calculateVisible(x, y, columns, rows);
+          console.log('coords ', x, y, board[y][x], calculateVisibles(x, y, columns, rows));
         }
-        console.log('coords ', x, y, board[y][x]);
+        else {
+          console.log('null');
+        }
       }
     }
-  }
-
-  runGame() {
-    this.visibleCells();
   }
 
   generateHandler(e) {
@@ -58,7 +55,7 @@ export default class Game extends Component {
     const { board, boardConfig } = this.state;
 
     return (
-      <StyledGame className="Game">
+      <div className="Game">
         {
           board &&
           <div>
@@ -68,7 +65,7 @@ export default class Game extends Component {
           </div>
         }
         <button onClick={this.generateHandler}>generate board</button>
-      </StyledGame>
+      </div>
     );
   }
 }

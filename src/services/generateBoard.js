@@ -1,4 +1,5 @@
-import { generateCell } from './generateCell';
+import generateCell from './generateCell';
+
 
 export default function generateBoard(x, y) {
   const board = [];
