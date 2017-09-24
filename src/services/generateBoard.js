@@ -1,8 +1,12 @@
+import cuid from 'cuid';
+
 function makeCreature(behavior) {
   return (
     {
       display: behavior,
       strategy: behavior,
+      lifePoints: Math.ceil(Math.random(9) * 9),
+      id: cuid(),
     }
   );
 }
@@ -12,6 +16,7 @@ function makeEmpty() {
     {
       display: '',
       strategy: null,
+      lifePoints: null,
     }
   );
 }

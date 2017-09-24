@@ -8,6 +8,7 @@ const StyledCell = styled.div`
     if (pr.strategy === 'chill') return 'blue';
     if (!pr.strategy) return 'brown';
   }};
+
   border: 1px solid black;
   display: flex;
   justify-content: center;
@@ -15,10 +16,10 @@ const StyledCell = styled.div`
   font-weight: bold;
 `;
 
-export default function Cell({ x, y, item }) {
+export default function Cell({ coords, cell }) {
   return (
-    <StyledCell strategy={item.strategy}>
-      {item.display}
+    <StyledCell strategy={cell.strategy}>
+      {cell.display}
     </StyledCell>
   );
 }

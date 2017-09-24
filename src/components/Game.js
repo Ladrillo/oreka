@@ -13,13 +13,13 @@ export default class Game extends Component {
     this.state = {
       board: null,
       size: {
-        x: 20, y: 20
+        width: 15, height: 15 // em
       }
     };
   }
 
   generateHandler(e) {
-    const board = generateBoard(5, 5);
+    const board = generateBoard(2, 2);
     this.setState({ board });
   }
 
@@ -32,10 +32,15 @@ export default class Game extends Component {
 
     return (
       <StyledGame className="Game">
-        { board && <Board board={board} size={size}/> }
+        {board && <Board board={board} size={size} />}
 
-        { !board && <button onClick={this.generateHandler.bind(this)}>generate board</button> }
-        { board && <button onClick={this.destroyHandler.bind(this)}>destroy board</button> }
+        <button onClick={this.generateHandler.bind(this)}>generate board</button>
+        {
+          board &&
+          <div>
+            <button onClick={this.destroyHandler.bind(this)}>destroy board</button>
+          </div>
+        }
       </StyledGame>
     );
   }
