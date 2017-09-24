@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Cell from './Cell';
 import { formatLine } from '../services/utils';
-import { findVisibleCells } from '../services/utils';
+
 
 const StyledBoard = styled.div`
   display: grid;
@@ -25,13 +25,16 @@ const StyledBoard = styled.div`
 export default class Board extends React.Component {
   render() {
     const { board, size } = this.props;
-    console.log(findVisibleCells(board[0].length, board.length, 0, 0));
+
     return (
       <StyledBoard board={board} size={size}>
         {
           board.map((row, y) => (
             row.map((cell, x) => (
-              <Cell coords={{x, y}} cell={board[y][x]}/>
+              <Cell
+                coords={{x, y}}
+                cell={board[y][x]}
+              />
             ))
           ))
         }

@@ -1,25 +1,4 @@
-import cuid from 'cuid';
-
-function makeCreature(behavior) {
-  return (
-    {
-      display: behavior,
-      strategy: behavior,
-      lifePoints: Math.ceil(Math.random(9) * 9),
-      id: cuid(),
-    }
-  );
-}
-
-function makeEmpty() {
-  return (
-    {
-      display: '',
-      strategy: null,
-      lifePoints: null,
-    }
-  );
-}
+import { generateCell } from './generateCell';
 
 export default function generateBoard(x, y) {
   const board = [];
@@ -32,16 +11,4 @@ export default function generateBoard(x, y) {
   };
 
   return board;
-}
-
-function generateCell() {
-  const chance = Math.floor(Math.random(3) * 3);
-  switch (chance) {
-    case 0:
-      return makeCreature('evil');
-    case 1:
-      return makeCreature('chill');
-    case 2:
-      return makeEmpty();
-  }
 }
