@@ -11,7 +11,7 @@ export function formatLine(count, length) {
 }
 
 
-export function findVisibleCells(x, y, width, height) {
+export function calculateVisible(x, y, width, height) {
   let xS = [];
   let yS = [];
 

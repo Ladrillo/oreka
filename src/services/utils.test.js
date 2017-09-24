@@ -1,6 +1,6 @@
-import { findVisibleCells } from './utils';
+import { calculateVisible } from './utils';
 
-describe('findVisibleCells', () => {
+describe('calculateVisible', () => {
 
     it('detects from upper left corner', () => {
         const result = [[1, 0], [0, 1]];
@@ -9,7 +9,7 @@ describe('findVisibleCells', () => {
         const currentX = 0;
         const currentY = 0;
 
-        expect(findVisibleCells(currentX, currentY, width, height)).toEqual(result);
+        expect(calculateVisible(currentX, currentY, width, height)).toEqual(result);
     });
 
     it('detects from upper right corner', () => {
@@ -19,7 +19,7 @@ describe('findVisibleCells', () => {
         const currentX = 1;
         const currentY = 0;
 
-        expect(findVisibleCells(currentX, currentY, width, height)).toEqual(result);
+        expect(calculateVisible(currentX, currentY, width, height)).toEqual(result);
     });
 
     it('detects from lower left corner', () => {
@@ -29,7 +29,7 @@ describe('findVisibleCells', () => {
         const currentX = 0;
         const currentY = 1;
 
-        expect(findVisibleCells(currentX, currentY, width, height)).toEqual(result);
+        expect(calculateVisible(currentX, currentY, width, height)).toEqual(result);
     });
 
     it('detects from lower right corner', () => {
@@ -39,7 +39,7 @@ describe('findVisibleCells', () => {
         const currentX = 1;
         const currentY = 1;
 
-        expect(findVisibleCells(currentX, currentY, width, height)).toEqual(result);
+        expect(calculateVisible(currentX, currentY, width, height)).toEqual(result);
     });
 
     it('detects from the middle', () => {
@@ -49,6 +49,6 @@ describe('findVisibleCells', () => {
         const currentX = 1;
         const currentY = 1;
 
-        expect(findVisibleCells(currentX, currentY, width, height)).toEqual(result);
+        expect(calculateVisible(currentX, currentY, width, height)).toEqual(result);
     });
 });

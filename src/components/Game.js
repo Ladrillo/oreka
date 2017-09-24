@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Board from './Board';
 import generateBoard from '../services/generateBoard';
-import { findVisibleCells } from '../services/utils';
+import { calculateVisible } from '../services/utils';
 
 const StyledGame = styled.div`
 
@@ -15,39 +15,38 @@ export default class Game extends Component {
       board: null,
       boardConfig: {
         width: 20,
-        height: 15,
-        cellsX: 2,
-        cellsY: 5,
+        height: 20,
+        columns: 3,
+        rows: 3,
       }
     };
     this.generateHandler = this.generateHandler.bind(this);
     this.destroyHandler = this.destroyHandler.bind(this);
-    this.findVisible = this.findVisible.bind(this);
+    this.visibleCells = this.visibleCells.bind(this);
     this.runGame = this.runGame.bind(this);
   }
 
-  findVisible(x, y) {
-    const { cellsX, cellsY } = this.state.boardConfig;
-
-    return findVisibleCells(
-      x, y, cellsX, cellsY
-    );
-  };
-
-  runGame() {
+  visibleCells() {
     const { board } = this.state;
+    const { columns, rows } = this.state.boardConfig;
 
-    for (let y = 0; y < board.length; y++) {
-      for (let x = 0; x < board[0].length; x++) {
-        board[y][x].visibles = this.findVisible(x, y);
-        console.log('cell present! ', x, y, board[y][x]);
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < columns; x++) {
+        if (board[y][x]) {
+          board[y][x].visibles = calculateVisible(x, y, columns, rows);
+        }
+        console.log('coords ', x, y, board[y][x]);
       }
     }
   }
 
+  runGame() {
+    this.visibleCells();
+  }
+
   generateHandler(e) {
-    const { cellsX, cellsY } = this.state.boardConfig;
-    const board = generateBoard(cellsX, cellsY);
+    const { columns, rows } = this.state.boardConfig;
+    const board = generateBoard(columns, rows);
     this.setState({ board });
   }
 

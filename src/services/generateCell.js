@@ -14,22 +14,21 @@ export function generateCell() {
 }
 
 function makeEmpty() {
-  return (
-    {
-      display: '',
-      strategy: null,
-      lifePoints: null,
-    }
-  );
+  return null;
 }
 
 export function makeCreature(behavior) {
   return (
     {
-      display: behavior === 'chill' ? ':)' : '>:(',
+      display: behaviorDisplay[behavior],
       strategy: behavior,
       lifePoints: Math.ceil(Math.random(9) * 9),
       id: cuid(),
     }
   );
 }
+
+const behaviorDisplay = {
+  chill: ':)',
+  evil: '>:(',
+};

@@ -4,9 +4,8 @@ import styled from 'styled-components';
 
 const StyledCell = styled.div`
   background-color: ${pr => {
-    if (pr.strategy === 'evil') return 'red';
-    if (pr.strategy === 'chill') return 'blue';
-    if (!pr.strategy) return 'brown';
+    if (pr.cell) return behaviorColor[pr.cell.strategy];
+    return behaviorColor.empty;
   }};
 
   border: 1px solid black;
@@ -16,10 +15,16 @@ const StyledCell = styled.div`
   font-weight: bold;
 `;
 
-export default function Cell({ coords, cell }) {
+export default function Cell({ cell }) {
   return (
-    <StyledCell strategy={cell.strategy}>
-      {cell.display}
+    <StyledCell cell={cell}>
+      {cell ? cell.display : null}
     </StyledCell>
   );
 }
+
+const behaviorColor = {
+  chill: 'blue',
+  evil: 'red',
+  empty: 'brown'
+};

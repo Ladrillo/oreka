@@ -8,13 +8,13 @@ const StyledBoard = styled.div`
   display: grid;
 
   grid-template-columns: ${pr => {
-    const { cellsX, width } = pr.boardConfig;
-    return formatLine(cellsX, width);
+    const { columns, width } = pr.boardConfig;
+    return formatLine(columns, width);
   }};
 
   grid-template-rows: ${pr => {
-    const { cellsY, height } = pr.boardConfig;
-    return formatLine(cellsY, height);
+    const { rows, height } = pr.boardConfig;
+    return formatLine(rows, height);
   }};
 `;
 
@@ -27,10 +27,7 @@ export default class Board extends React.Component {
         {
           board.map((row, y) => (
             row.map((cell, x) => (
-              <Cell
-                coords={{x, y}}
-                cell={board[y][x]}
-              />
+              <Cell cell={board[y][x]} />
             ))
           ))
         }
