@@ -13,8 +13,11 @@ export default class Game extends Component {
     super(props);
     this.state = {
       board: null,
-      size: {
-        width: 15, height: 15
+      boardConfig: {
+        width: 20,
+        height: 15,
+        cellsX: 2,
+        cellsY: 5,
       }
     };
     this.generateHandler = this.generateHandler.bind(this);
@@ -24,23 +27,27 @@ export default class Game extends Component {
   }
 
   findVisible(x, y) {
+    const { cellsX, cellsY } = this.state.boardConfig;
+
     return findVisibleCells(
-      x, y, this.state.size.width, this.state.size.height
+      x, y, cellsX, cellsY
     );
   };
 
   runGame() {
     const { board } = this.state;
 
-    for (let i = 0; i < board.length[0]; i++) {
-      for (let k = 0; k < board.length; k++) {
-        console.log('cell: ', i, k);
+    for (let y = 0; y < board.length; y++) {
+      for (let x = 0; x < board[0].length; x++) {
+        board[y][x].visibles = this.findVisible(x, y);
+        console.log('cell present! ', x, y, board[y][x]);
       }
     }
   }
 
   generateHandler(e) {
-    const board = generateBoard(4, 4);
+    const { cellsX, cellsY } = this.state.boardConfig;
+    const board = generateBoard(cellsX, cellsY);
     this.setState({ board });
   }
 
@@ -49,17 +56,14 @@ export default class Game extends Component {
   }
 
   render() {
-    const { board, size } = this.state;
+    const { board, boardConfig } = this.state;
 
     return (
       <StyledGame className="Game">
         {
           board &&
           <div>
-            <Board
-              board={board}
-              size={size}
-            />
+            <Board board={board} boardConfig={boardConfig} />
             <button onClick={this.runGame}>run game</button>
             <button onClick={this.destroyHandler}>destroy board</button>
           </div>

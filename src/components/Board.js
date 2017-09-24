@@ -8,26 +8,22 @@ const StyledBoard = styled.div`
   display: grid;
 
   grid-template-columns: ${pr => {
-    const columnCount = pr.board[0].length;
-    const width = pr.size.width;
-
-    return formatLine(columnCount, width);
+    const { cellsX, width } = pr.boardConfig;
+    return formatLine(cellsX, width);
   }};
 
   grid-template-rows: ${pr => {
-    const columnCount = pr.board.length;
-    const width = pr.size.height;
-
-    return formatLine(columnCount, width);
+    const { cellsY, height } = pr.boardConfig;
+    return formatLine(cellsY, height);
   }};
 `;
 
 export default class Board extends React.Component {
   render() {
-    const { board, size } = this.props;
+    const { board, boardConfig } = this.props;
 
     return (
-      <StyledBoard board={board} size={size}>
+      <StyledBoard boardConfig={boardConfig}>
         {
           board.map((row, y) => (
             row.map((cell, x) => (

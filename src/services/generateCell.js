@@ -26,7 +26,7 @@ function makeEmpty() {
 export function makeCreature(behavior) {
   return (
     {
-      display: behavior,
+      display: behavior === 'chill' ? ':)' : '>:(',
       strategy: behavior,
       lifePoints: Math.ceil(Math.random(9) * 9),
       id: cuid(),
