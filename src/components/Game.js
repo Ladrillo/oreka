@@ -22,6 +22,7 @@ export default class Game extends Component {
     this.generateHandler = this.generateHandler.bind(this);
     this.destroyHandler = this.destroyHandler.bind(this);
     this.runGame = this.runGame.bind(this);
+    this.loop = this.loop.bind(this);
   }
 
   runGame() {
@@ -60,6 +61,13 @@ export default class Game extends Component {
     }
 
     this.setState({ board: cleanUpTheDead(newBoard) });
+  }
+
+  loop() {
+    // need a way to stop this
+    setInterval(() => {
+      this.runGame();
+    }, 250);
   }
 
   generateHandler(e) {
