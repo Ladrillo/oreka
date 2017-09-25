@@ -12,15 +12,29 @@ const StyledCell = styled.div`
 
   border: 1px solid black;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  font-weight: bold;
+
+  .display {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .lifePoints {
+    font-size: 1rem;
+  }
 `;
 
 export default function Cell({ cell }) {
   return (
     <StyledCell cell={cell}>
-      {cell ? cell.display : null}
+      <div className='display'>
+        {cell ? cell.display : null}
+      </div>
+      <div className='life-points'>
+        {cell ? `life: ${cell.lifePoints}` : null}
+      </div>
     </StyledCell>
   );
 }

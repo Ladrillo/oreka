@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Board from './Board';
 import generateBoard from '../services/generateBoard';
 import calculateVisibles from '../services/calculateVisibles';
+import interact from '../services/interact';
+import { cleanUpTheDead } from '../services/refreshBoard';
 
 
 export default class Game extends Component {
@@ -11,10 +13,10 @@ export default class Game extends Component {
     this.state = {
       board: null,
       boardConfig: {
-        width: 20,
-        height: 20,
-        columns: 2,
-        rows: 2,
+        width: 60,
+        height: 60,
+        columns: 10,
+        rows: 10,
       }
     };
     this.generateHandler = this.generateHandler.bind(this);
@@ -26,17 +28,21 @@ export default class Game extends Component {
     const { board, boardConfig } = this.state;
     const { columns, rows } = boardConfig;
 
+    // what a freakin' mutation fest this is
+    const newBoard = JSON.parse(JSON.stringify(board));
+
     // MAIN GAME LOOP
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < columns; x++) {
+        const cell = newBoard[y][x];
 
         // EMPIEZA LA FIESTA
-        if (board[y][x]) {
+        if (cell) {
           // find all visible pairs of coordinates
           const visibleCoords = calculateVisibles(x, y, columns, rows);
 
           // filter out empty cells
-          const visibleCells = visibleCoords.filter(coords => !!board[coords[1]][coords[0]]);
+          const visibleCells = visibleCoords.filter(coords => newBoard[coords[1]][coords[0]] !== null);
           const totalVisibles = visibleCells.length;
 
           if (!totalVisibles) {
@@ -46,15 +52,23 @@ export default class Game extends Component {
 
           // get coordinates of just one of the visibles
           const [xPartner, yPartner] = visibleCells[Math.floor(Math.random(totalVisibles) * totalVisibles)];
-          const partner = board[yPartner][xPartner];
+          const partner = newBoard[yPartner][xPartner];
 
-          console.log('my coords: ', x, y, 'partner: ', xPartner, yPartner, partner);
+          console.log('me: ', cell, 'my life BEFORE: ', cell.lifePoints);
+          console.log('my partner: ', partner, 'his life BEFORE: ', partner.lifePoints);
+
+          // recompute the new cells with the new lifePoints after interaction
+          interact(cell, partner);
+          console.log('me: ', cell, 'my life AFTER: ', cell.lifePoints);
+          console.log('my partner: ', partner, 'his life AFTER: ', partner.lifePoints);
         }
         else {
           console.log('null');
         }
       }
     }
+
+    this.setState({ board: cleanUpTheDead(newBoard) });
   }
 
   generateHandler(e) {
@@ -76,7 +90,7 @@ export default class Game extends Component {
           board &&
           <div>
             <Board board={board} boardConfig={boardConfig} />
-            <button onClick={this.runGame}>run game</button>
+            <button onClick={this.runGame}>run iteration</button>
             <button onClick={this.destroyHandler}>destroy board</button>
           </div>
         }
