@@ -15,8 +15,8 @@ export default class Game extends Component {
       boardConfig: {
         width: 60,
         height: 60,
-        columns: 10,
-        rows: 10,
+        columns: 12,
+        rows: 12,
       }
     };
     this.generateHandler = this.generateHandler.bind(this);
@@ -46,7 +46,7 @@ export default class Game extends Component {
           const totalVisibles = visibleCells.length;
 
           if (!totalVisibles) {
-            console.log(x, y, 'did not find partner');
+            console.log(x, y, 'Cell could not find partner');
             continue;
           }
 
@@ -54,16 +54,8 @@ export default class Game extends Component {
           const [xPartner, yPartner] = visibleCells[Math.floor(Math.random(totalVisibles) * totalVisibles)];
           const partner = newBoard[yPartner][xPartner];
 
-          console.log('me: ', cell, 'my life BEFORE: ', cell.lifePoints);
-          console.log('my partner: ', partner, 'his life BEFORE: ', partner.lifePoints);
-
           // recompute the new cells with the new lifePoints after interaction
           interact(cell, partner);
-          console.log('me: ', cell, 'my life AFTER: ', cell.lifePoints);
-          console.log('my partner: ', partner, 'his life AFTER: ', partner.lifePoints);
-        }
-        else {
-          console.log('null');
         }
       }
     }

@@ -18,11 +18,11 @@ const StyledCell = styled.div`
 
   .display {
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .lifePoints {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 `;
 
