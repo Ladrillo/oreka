@@ -13,8 +13,8 @@ export default class Game extends Component {
       boardConfig: {
         width: 20,
         height: 20,
-        columns: 3,
-        rows: 3,
+        columns: 2,
+        rows: 2,
       }
     };
     this.generateHandler = this.generateHandler.bind(this);
@@ -32,7 +32,23 @@ export default class Game extends Component {
 
         // EMPIEZA LA FIESTA
         if (board[y][x]) {
-          console.log('coords ', x, y, board[y][x], calculateVisibles(x, y, columns, rows));
+          // find all visible pairs of coordinates
+          const visibleCoords = calculateVisibles(x, y, columns, rows);
+
+          // filter out empty cells
+          const visibleCells = visibleCoords.filter(coords => !!board[coords[1]][coords[0]]);
+          const totalVisibles = visibleCells.length;
+
+          if (!totalVisibles) {
+            console.log(x, y, 'did not find partner');
+            continue;
+          }
+
+          // get coordinates of just one of the visibles
+          const [xPartner, yPartner] = visibleCells[Math.floor(Math.random(totalVisibles) * totalVisibles)];
+          const partner = board[yPartner][xPartner];
+
+          console.log('my coords: ', x, y, 'partner: ', xPartner, yPartner, partner);
         }
         else {
           console.log('null');
