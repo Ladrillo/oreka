@@ -7,6 +7,11 @@ import interact from '../services/interact';
 import { cleanUpTheDead } from '../services/refreshBoard';
 
 
+const StyledGame = styled.div`
+  width: 100%;
+`;
+
+
 export default class Game extends Component {
   constructor(props) {
     super(props);
@@ -84,7 +89,7 @@ export default class Game extends Component {
     const { board, boardConfig } = this.state;
 
     return (
-      <div className="Game">
+      <StyledGame className="Game">
         {
           board &&
           <div>
@@ -94,7 +99,7 @@ export default class Game extends Component {
           </div>
         }
         <button onClick={this.generateHandler}>generate board</button>
-      </div>
+      </StyledGame>
     );
   }
 }
