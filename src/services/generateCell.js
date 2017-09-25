@@ -10,7 +10,7 @@ function makeUnit(behavior) {
   return {
     display: behaviorDisplay[behavior],
     strategy: behavior,
-    lifePoints: Math.ceil(Math.random(9) * 9),
+    lifePoints: Math.ceil(Math.random(19) * 19),
     id: cuid(),
   };
 }

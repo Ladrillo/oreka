@@ -46,7 +46,6 @@ export default class Game extends Component {
           const totalVisibles = visibleCells.length;
 
           if (!totalVisibles) {
-            console.log(x, y, 'Cell could not find partner');
             continue;
           }
 
