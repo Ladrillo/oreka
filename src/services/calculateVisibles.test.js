@@ -1,4 +1,4 @@
-import calculateVisibles from './utils';
+import calculateVisibles from './calculateVisibles';
 
 describe('calculateVisibles', () => {
 
