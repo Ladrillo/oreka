@@ -47,7 +47,9 @@ export default class Game extends Component {
           const visibleCoords = calculateVisibles(x, y, columns, rows);
 
           // filter out empty cells
-          const visibleCells = visibleCoords.filter(coords => newBoard[coords[1]][coords[0]] !== null);
+          const visibleCells = visibleCoords.filter(
+            coords => newBoard[coords[1]][coords[0]] !== null
+          );
           const totalVisibles = visibleCells.length;
 
           if (!totalVisibles) {
@@ -55,7 +57,8 @@ export default class Game extends Component {
           }
 
           // get coordinates of just one of the visibles
-          const [xPartner, yPartner] = visibleCells[Math.floor(Math.random(totalVisibles) * totalVisibles)];
+          const [xPartner, yPartner] =
+            visibleCells[Math.floor(Math.random(totalVisibles) * totalVisibles)];
           const partner = newBoard[yPartner][xPartner];
 
           // recompute the new cells with the new lifePoints after interaction
