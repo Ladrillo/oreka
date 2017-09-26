@@ -11,6 +11,7 @@ const StyledCell = styled.div`
     return behaviorColor.empty;
   }};
 
+  transition: all 0.18s ease-in-out;
   border: 1px solid black;
   display: flex;
   flex-direction: column;

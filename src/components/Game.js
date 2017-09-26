@@ -19,8 +19,8 @@ export default class Game extends Component {
       boardConfig: {
         width: 60,
         height: 60,
-        columns: 10,
-        rows: 10,
+        columns: 15,
+        rows: 15,
       }
     };
     this.generateHandler = this.generateHandler.bind(this);
