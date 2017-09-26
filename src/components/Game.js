@@ -11,7 +11,6 @@ const StyledGame = styled.div`
   width: 100%;
 `;
 
-
 export default class Game extends Component {
   constructor(props) {
     super(props);
@@ -20,8 +19,8 @@ export default class Game extends Component {
       boardConfig: {
         width: 60,
         height: 60,
-        columns: 13,
-        rows: 13,
+        columns: 10,
+        rows: 10,
       }
     };
     this.generateHandler = this.generateHandler.bind(this);
