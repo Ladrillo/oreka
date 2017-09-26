@@ -4,7 +4,8 @@ export function cleanUpTheDead(board) {
   for (let row = 0; row < board.length; row++) {
     refreshedBoard.push(
       board[row].map(
-        cell => (cell && cell.lifePoints > 0) ? cell : null)
+        cell => (cell && cell.lifePoints > 0) ? cell : null
+      )
     );
   }
 

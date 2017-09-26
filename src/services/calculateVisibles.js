@@ -1,17 +1,33 @@
 export default function calculateVisibles(x, y, columns, rows) {
-  let xS = [];
-  let yS = [];
+  const result = [];
 
-  if (x - 1 >= 0) xS.push(x - 1);
-  if (x + 1 < columns) xS.push(x + 1);
+  if (x - 1 >= 0) {
+    if (y - 1 >= 0) {
+      result.push([x - 1, y - 1]);
+    }
+    if (y + 1 < rows) {
+      result.push([x - 1, y + 1]);
+    }
+    result.push([x - 1, y]);
+  }
 
-  if (y - 1 >= 0) yS.push(y - 1);
-  if (y + 1 < rows) yS.push(y + 1);
+  if (x + 1 < columns) {
+    if (y - 1 >= 0) {
+      result.push([x + 1, y - 1]);
+    }
+    if (y + 1 < rows) {
+      result.push([x + 1, y + 1]);
+    }
+    result.push([x + 1, y]);
+  }
 
-  let visibleCells = [];
+  if (y - 1 >= 0) {
+    result.push([x, y - 1]);
+  }
 
-  xS.forEach(newX => visibleCells.push([newX, y]));
-  yS.forEach(newY => visibleCells.push([x, newY]));
+  if (y + 1 < rows) {
+    result.push([x, y + 1]);
+  }
 
-  return visibleCells;
+  return result;
 }
