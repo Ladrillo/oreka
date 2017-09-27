@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Board from './Board';
 import { cloneDeep } from 'lodash';
 import generateBoard from '../services/generateBoard';
+import { generateCell } from '../services/generateCell';
 import calculateVisibles from '../services/calculateVisibles';
 import interact from '../services/interact';
 import { cleanUpTheDead } from '../services/refreshBoard';
@@ -20,8 +21,8 @@ export default class Game extends Component {
       boardConfig: {
         width: 60,
         height: 60,
-        columns: 3,
-        rows: 3,
+        columns: 12,
+        rows: 12,
       }
     };
     this.generateHandler = this.generateHandler.bind(this);
@@ -47,26 +48,41 @@ export default class Game extends Component {
 
         // EMPIEZA LA FIESTA
         if (cell) {
-          // find all visible pairs of coordinates
-          const visibleCoords = calculateVisibles(x, y, columns, rows);
+          // 1- all visible slots
+          const visibleSlots = calculateVisibles(x, y, columns, rows);
 
-          // filter out empty cells
-          const visibleCells = visibleCoords.filter(
+          // 2- slots used by cells
+          const visibleSlotsUsed = visibleSlots.filter(
             coords => newBoard[coords[1]][coords[0]] !== null
           );
-          const totalVisibles = visibleCells.length;
+          const totalInteractive = visibleSlotsUsed.length;
+          const canInteract = !!totalInteractive;
 
-          if (!totalVisibles) {
-            continue;
+          // 3- slots that are empty
+          const visibleSlotsEmpty = visibleSlots.filter(
+            coords => newBoard[coords[1]][coords[0]] === null
+          );
+          const totalReproductive = visibleSlotsEmpty.length;
+          const canReproduce = !!totalReproductive && cell.lifePoints > 100;
+
+          // 4- interact
+          if (canInteract) {
+            const randomInteractive = Math.floor(Math.random(totalInteractive) * totalInteractive);
+            const [_x, _y] = visibleSlotsUsed[randomInteractive];
+            const partner = newBoard[_y][_x];
+
+            interact(cell, partner);
           }
 
-          // get coordinates of just one of the visibles
-          const [xPartner, yPartner] =
-            visibleCells[Math.floor(Math.random(totalVisibles) * totalVisibles)];
-          const partner = newBoard[yPartner][xPartner];
+          // 5- reproduce
+          if (canReproduce) {
+            const randomReproductive = Math.floor(Math.random(totalReproductive) * totalReproductive);
+            const [_x, _y] = visibleSlotsEmpty[randomReproductive];
 
-          // recompute the new cells with the new lifePoints after interaction
-          interact(cell, partner);
+            newBoard[_y][_x] = generateCell(cell.strategy);
+            const alteredCell = { ...cell, lifePoints: Math.floor(cell.lifePoints/2)};
+            newBoard[y][x] = alteredCell;
+          }
         }
       }
     }

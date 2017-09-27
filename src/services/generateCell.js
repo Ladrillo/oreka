@@ -6,7 +6,7 @@ const behaviorDisplay = {
   evil: '>:(',
 };
 
-function makeUnit(behavior) {
+export function generateCell(behavior) {
   return {
     display: behaviorDisplay[behavior],
     strategy: behavior,
@@ -15,13 +15,13 @@ function makeUnit(behavior) {
   };
 }
 
-export default function generateCell() {
+export function generateRandomCell() {
   const chance = Math.floor(Math.random(3) * 3);
   switch (chance) {
     case 0:
-      return makeUnit('evil');
+      return generateCell('evil');
     case 1:
-      return makeUnit('chill');
+      return generateCell('chill');
     case 2:
       return null;
   }

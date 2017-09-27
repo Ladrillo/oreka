@@ -1,4 +1,4 @@
-import generateCell from './generateCell';
+import { generateRandomCell } from './generateCell';
 
 
 export default function generateBoard(columns, rows) {
@@ -6,7 +6,7 @@ export default function generateBoard(columns, rows) {
   for (let i = 0; i < rows; i++) {
     const row = [];
     for (let k = 0; k < columns; k++) {
-      row.push(generateCell());
+      row.push(generateRandomCell());
     }
     board.push(row);
   };
