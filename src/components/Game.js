@@ -19,9 +19,9 @@ export default class Game extends Component {
     this.state = {
       board: null,
       boardConfig: {
-        width: 60,
+        width: 120,
         height: 60,
-        columns: 12,
+        columns: 24,
         rows: 12,
       }
     };
@@ -83,6 +83,11 @@ export default class Game extends Component {
             const alteredCell = { ...cell, lifePoints: Math.floor(cell.lifePoints/2)};
             newBoard[y][x] = alteredCell;
           }
+
+          if (!canInteract && !canReproduce) {
+            const alteredCell = { ...cell, lifePoints: cell.lifePoints - 1};
+            newBoard[y][x] = alteredCell;
+          }
         }
       }
     }
@@ -116,7 +121,7 @@ export default class Game extends Component {
           board &&
           <div>
             <Board board={board} boardConfig={boardConfig} />
-            <button onClick={this.runGame}>run iteration</button>
+            <button onClick={this.loop}>run iteration</button>
             <button onClick={this.destroyHandler}>destroy board</button>
           </div>
         }
