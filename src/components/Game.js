@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Board from './Board';
+import { cloneDeep } from 'lodash';
 import generateBoard from '../services/generateBoard';
 import calculateVisibles from '../services/calculateVisibles';
 import interact from '../services/interact';
@@ -19,8 +20,8 @@ export default class Game extends Component {
       boardConfig: {
         width: 60,
         height: 60,
-        columns: 15,
-        rows: 15,
+        columns: 3,
+        rows: 3,
       }
     };
     this.generateHandler = this.generateHandler.bind(this);
@@ -34,7 +35,10 @@ export default class Game extends Component {
     const { columns, rows } = boardConfig;
 
     // what a freakin' mutation fest this is
-    const newBoard = JSON.parse(JSON.stringify(board));
+
+    const newBoard = cloneDeep(board);
+    // const newBoard = JSON.parse(JSON.stringify(board));
+    // const newBoard = copy(board, {});
 
     // MAIN GAME LOOP
     for (let y = 0; y < rows; y++) {

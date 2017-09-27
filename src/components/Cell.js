@@ -48,10 +48,12 @@ const behaviorColor = {
     dark3: darken(0.15, '#797CFF'),
     dark2: darken(0.1, '#797CFF'),
     dark1: darken(0.05, '#797CFF'),
-    base: '#797CFF',
+
     light1: lighten(0.05, '#797CFF'),
     light2: lighten(0.1, '#797CFF'),
     light3: lighten(0.15, '#797CFF'),
+
+    base: '#797CFF',
   },
   evil: {
     dark5: darken(0.3, '#FF6D6D'),
@@ -59,10 +61,12 @@ const behaviorColor = {
     dark3: darken(0.15, '#FF6D6D'),
     dark2: darken(0.1, '#FF6D6D'),
     dark1: darken(0.05, '#FF6D6D'),
-    base: '#FF6D6D',
+
     light1: lighten(0.05, '#FF6D6D'),
     light2: lighten(0.1, '#FF6D6D'),
     light3: lighten(0.15, '#FF6D6D'),
+    
+    base: '#FF6D6D',
   },
   empty: '#322424'
 };
