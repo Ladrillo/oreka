@@ -31,12 +31,12 @@ const StyledCell = styled.div`
 export default function Cell({ cell }) {
   return (
     <StyledCell cell={cell}>
-      <div className='display'>
+      {/* <div className='display'>
         {cell ? cell.display : null}
       </div>
       <div className='life-points'>
         {cell ? `life: ${cell.lifePoints}` : null}
-      </div>
+      </div> */}
     </StyledCell>
   );
 }

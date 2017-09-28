@@ -31,6 +31,10 @@ export default class Game extends Component {
     this.loop = this.loop.bind(this);
   }
 
+  componentDidMount() {
+    this.generateHandler();
+    this.loop();
+  }
   runGame() {
     const { board, boardConfig } = this.state;
     const { columns, rows } = boardConfig;
