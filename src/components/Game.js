@@ -19,10 +19,10 @@ export default class Game extends Component {
     this.state = {
       board: null,
       boardConfig: {
-        width: 120,
+        width: 60,
         height: 60,
-        columns: 36,
-        rows: 24,
+        columns: 20,
+        rows: 20,
       }
     };
     this.generateHandler = this.generateHandler.bind(this);
@@ -32,8 +32,8 @@ export default class Game extends Component {
   }
 
   componentDidMount() {
-    this.generateHandler();
-    this.loop();
+    // this.generateHandler();
+    // this.loop();
   }
   runGame() {
     const { board, boardConfig } = this.state;

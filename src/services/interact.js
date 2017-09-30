@@ -1,44 +1,59 @@
-export default function interact(cell, partner) {
-    const cellCollaborates = collaborate(cell.strategy);
-    const partnerCollaborates = collaborate(partner.strategy);
+export default function interact(me, partner) {
+    const meCollaborates = collaborate(me, partner);
+    const partnerCollaborates = collaborate(partner, me);
 
-    if (cellCollaborates && partnerCollaborates) {
-        cell.lifePoints = cell.lifePoints + 3;
+    if (meCollaborates && partnerCollaborates) {
+        me.lifePoints = me.lifePoints + 3;
         partner.lifePoints = partner.lifePoints + 3;
+
+        me.trustedBy = me.trustedBy.add(partner.id);
+        partner.trustedBy = partner.trustedBy.add(me.id);
     }
-    else if (cellCollaborates && !partnerCollaborates) {
-        cell.lifePoints = cell.lifePoints - 6;
+    else if (meCollaborates && !partnerCollaborates) {
+        me.lifePoints = me.lifePoints - 6;
         partner.lifePoints = partner.lifePoints + 5;
+
+        me.betrayedBy = me.betrayedBy.add(partner.id);
+        partner.trustedBy = partner.trustedBy.add(me.id);
     }
-    else if (!cellCollaborates && partnerCollaborates) {
-        cell.lifePoints = cell.lifePoints + 5;
+    else if (!meCollaborates && partnerCollaborates) {
+        me.lifePoints = me.lifePoints + 5;
         partner.lifePoints = partner.lifePoints - 6;
+
+        me.trustedBy = me.trustedBy.add(partner.id);
+        partner.betrayedBy = partner.betrayedBy.add(me.id);
     }
-    else if (!cellCollaborates && !partnerCollaborates) {
-        cell.lifePoints = cell.lifePoints - 2;
+    else if (!meCollaborates && !partnerCollaborates) {
+        me.lifePoints = me.lifePoints - 2;
         partner.lifePoints = partner.lifePoints - 2;
+
+        me.betrayedBy = me.betrayedBy.add(partner.id);
+        partner.betrayedBy = partner.betrayedBy.add(me.id);
     }
 }
 
-function collaborate(strategy, partner) {
-    switch (strategy) {
+function collaborate(me, you) {
+    switch (me.strategy) {
         case 'chill':
-            return chillStrategy(partner);
+            return chill(me, you);
         case 'evil':
-            return evilStrategy(partner);
-        case 'titfortat':
-            return titTatStrategy(partner);
+            return evil(me, you);
+        case 'grudge':
+            return grudge(me, you);
     }
 }
 
-function chillStrategy(partner) {
+function chill() {
     return true;
 }
 
-function evilStrategy(partner) {
+function evil() {
     return false;
 }
 
-function titTatStrategy(partner) {
-    
+function grudge(me, you) {
+    if (me.betrayedBy.has(you.id)) {
+        return false;
+    }
+    return true;
 }

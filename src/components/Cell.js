@@ -31,12 +31,6 @@ const StyledCell = styled.div`
 export default function Cell({ cell }) {
   return (
     <StyledCell cell={cell}>
-      {/* <div className='display'>
-        {cell ? cell.display : null}
-      </div>
-      <div className='life-points'>
-        {cell ? `life: ${cell.lifePoints}` : null}
-      </div> */}
     </StyledCell>
   );
 }
@@ -67,6 +61,19 @@ const behaviorColor = {
     light3: lighten(0.15, '#FF6D6D'),
     
     base: '#FF6D6D',
+  },
+  grudge: {
+    dark5: darken(0.3, '#4EC15E'),
+    dark4: darken(0.2, '#4EC15E'),
+    dark3: darken(0.15, '#4EC15E'),
+    dark2: darken(0.1, '#4EC15E'),
+    dark1: darken(0.05, '#4EC15E'),
+
+    light1: lighten(0.05, '#4EC15E'),
+    light2: lighten(0.1, '#4EC15E'),
+    light3: lighten(0.15, '#4EC15E'),
+    
+    base: '#4EC15E',
   },
   empty: '#322424'
 };
