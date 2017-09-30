@@ -7,12 +7,12 @@ export default function interact(cell, partner) {
         partner.lifePoints = partner.lifePoints + 3;
     }
     else if (cellCollaborates && !partnerCollaborates) {
-        cell.lifePoints = cell.lifePoints - 4;
+        cell.lifePoints = cell.lifePoints - 6;
         partner.lifePoints = partner.lifePoints + 5;
     }
     else if (!cellCollaborates && partnerCollaborates) {
         cell.lifePoints = cell.lifePoints + 5;
-        partner.lifePoints = partner.lifePoints - 4;
+        partner.lifePoints = partner.lifePoints - 6;
     }
     else if (!cellCollaborates && !partnerCollaborates) {
         cell.lifePoints = cell.lifePoints - 2;
@@ -20,11 +20,25 @@ export default function interact(cell, partner) {
     }
 }
 
-function collaborate(strategy) {
+function collaborate(strategy, partner) {
     switch (strategy) {
         case 'chill':
-            return true;
+            return chillStrategy(partner);
         case 'evil':
-            return false;
+            return evilStrategy(partner);
+        case 'titfortat':
+            return titTatStrategy(partner);
     }
+}
+
+function chillStrategy(partner) {
+    return true;
+}
+
+function evilStrategy(partner) {
+    return false;
+}
+
+function titTatStrategy(partner) {
+    
 }
