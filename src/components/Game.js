@@ -103,7 +103,7 @@ export default class Game extends Component {
     // need a way to stop this
     setInterval(() => {
       this.runGame();
-    }, 250);
+    }, 500);
   }
 
   generateHandler(e) {

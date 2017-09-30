@@ -3,21 +3,21 @@ export default function interact(me, partner) {
     const partnerCollaborates = collaborate(partner, me);
 
     if (meCollaborates && partnerCollaborates) {
-        me.lifePoints = me.lifePoints + 3;
-        partner.lifePoints = partner.lifePoints + 3;
+        me.lifePoints = Math.min(500, me.lifePoints + 3);
+        partner.lifePoints = Math.min(500, partner.lifePoints + 3);
 
         me.trustedBy = me.trustedBy.add(partner.id);
         partner.trustedBy = partner.trustedBy.add(me.id);
     }
     else if (meCollaborates && !partnerCollaborates) {
         me.lifePoints = me.lifePoints - 6;
-        partner.lifePoints = partner.lifePoints + 5;
+        partner.lifePoints = Math.min(500, partner.lifePoints + 5);
 
         me.betrayedBy = me.betrayedBy.add(partner.id);
         partner.trustedBy = partner.trustedBy.add(me.id);
     }
     else if (!meCollaborates && partnerCollaborates) {
-        me.lifePoints = me.lifePoints + 5;
+        me.lifePoints = Math.min(500, me.lifePoints + 5);
         partner.lifePoints = partner.lifePoints - 6;
 
         me.trustedBy = me.trustedBy.add(partner.id);

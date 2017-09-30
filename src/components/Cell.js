@@ -63,17 +63,17 @@ const behaviorColor = {
     base: '#FF6D6D',
   },
   grudge: {
-    dark5: darken(0.3, '#4EC15E'),
-    dark4: darken(0.2, '#4EC15E'),
-    dark3: darken(0.15, '#4EC15E'),
-    dark2: darken(0.1, '#4EC15E'),
-    dark1: darken(0.05, '#4EC15E'),
+    dark5: darken(0.3, '#65A151'),
+    dark4: darken(0.2, '#65A151'),
+    dark3: darken(0.15, '#65A151'),
+    dark2: darken(0.1, '#65A151'),
+    dark1: darken(0.05, '#65A151'),
 
-    light1: lighten(0.05, '#4EC15E'),
-    light2: lighten(0.1, '#4EC15E'),
-    light3: lighten(0.15, '#4EC15E'),
+    light1: lighten(0.05, '#65A151'),
+    light2: lighten(0.1, '#65A151'),
+    light3: lighten(0.15, '#65A151'),
     
-    base: '#4EC15E',
+    base: '#65A151',
   },
   empty: '#322424'
 };
