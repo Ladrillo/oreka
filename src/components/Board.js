@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Cell from './Cell';
 import { formatLine } from '../services/cssHelpers';
+import cuid from 'cuid';
 
 
 const StyledBoard = styled.div`
@@ -27,7 +28,7 @@ export default class Board extends React.Component {
         {
           board.map((row, y) => (
             row.map((cell, x) => (
-              <Cell cell={board[y][x]} />
+              <Cell cell={board[y][x]} key={cuid()} />
             ))
           ))
         }
