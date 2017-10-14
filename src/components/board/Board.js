@@ -1,23 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import Cell from '../cell';
-import { formatLine } from '../../services/cssHelpers';
+import StyledBoard from './styled';
 import cuid from 'cuid';
 
-
-const StyledBoard = styled.div`
-  display: grid;
-
-  grid-template-columns: ${pr => {
-    const { columns, width } = pr.boardConfig;
-    return formatLine(columns, width);
-  }};
-
-  grid-template-rows: ${pr => {
-    const { rows, height } = pr.boardConfig;
-    return formatLine(rows, height);
-  }};
-`;
 
 export default class Board extends React.Component {
   render() {
