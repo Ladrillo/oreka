@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Board from './Board';
-import generateBoard from '../services/generateBoard';
-import iterate from '../services/iterate';
+import Board from '../board';
+import generateBoard from '../../services/generateBoard';
+import iterate from '../../services/iterate';
 
 
 const StyledGame = styled.div`
@@ -15,42 +15,37 @@ export default class Game extends Component {
     this.state = {
       board: null,
       boardConfig: {
-        width: 60,
-        height: 60,
-        columns: 20,
-        rows: 20,
+        width: 20,
+        height: 20,
+        columns: 10,
+        rows: 10,
       }
     };
-    this.generateHandler = this.generateHandler.bind(this);
-    this.destroyHandler = this.destroyHandler.bind(this);
-    this.runGame = this.runGame.bind(this);
-    this.stopGame = this.stopGame.bind(this);
-    this.loop = this.loop.bind(this);
   }
 
-  runGame() {
+  runGame = () => {
     const { board, boardConfig } = this.state;
     const newBoard = iterate({ board, boardConfig });
     this.setState({ board: newBoard });
   }
 
-  stopGame() {
+  stopGame = () => {
     clearInterval(window.interval);
   }
 
-  loop() {
+  loop = () => {
     window.interval = setInterval(() => {
       this.runGame();
     }, 500);
   }
 
-  generateHandler(e) {
+  generateHandler = (e) => {
     const { columns, rows } = this.state.boardConfig;
     const board = generateBoard(columns, rows);
     this.setState({ board });
   }
 
-  destroyHandler(e) {
+  destroyHandler = (e) => {
     this.setState({ board: null });
   }
 

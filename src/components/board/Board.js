@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Cell from './Cell';
-import { formatLine } from '../services/cssHelpers';
+import Cell from '../cell';
+import { formatLine } from '../../services/cssHelpers';
 import cuid from 'cuid';
 
 

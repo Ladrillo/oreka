@@ -10,7 +10,7 @@ export default class Form extends React.Component {
       onFirst: 'trust',
       onNext: 'trust',
       flash: '',
-    }
+    };
     this.changeHandler = this.changeHandler.bind(this);
   }
 
@@ -20,7 +20,7 @@ export default class Form extends React.Component {
 
     if (e.target.value === 'noMemory' && this.state.onNext === 'onNextRciprocate') {
       this.setState({ flash: 'not happening' });
-      this.setState({ onNext: 'trust' })
+      this.setState({ onNext: 'trust' });
     }
   }
 
@@ -30,9 +30,9 @@ export default class Form extends React.Component {
         <input name='color' type='color' value={this.state.color} onChange={this.changeHandler} />
 
         <select name='memory' value={this.state.memory} onChange={this.changeHandler}>
-          <option value='noMemory'>No Memmory</option>
-          <option value='shortMemory'>Short Memmory</option>
-          <option value='longMemory'>Long Memmory</option>
+          <option value='noMemory'>No Memory</option>
+          <option value='shortMemory'>Short Memory</option>
+          <option value='longMemory'>Long Memory</option>
         </select>
 
         <select name='onFirst' placeholder='on first' value={this.state.onFirst} onChange={this.changeHandler}>
