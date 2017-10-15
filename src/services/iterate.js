@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
 import { generateCell } from '../services/generateCell';
-import  { calculateVisibles } from '../services/studyNeighbors';
+import  { calculateVisibles } from './calculateVisibles';
 import { cleanUpTheDead } from '../services/refreshBoard';
 import interact from '../services/interact';
 

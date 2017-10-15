@@ -1,4 +1,4 @@
-import { calculateVisibles } from './studyNeighbors';
+import { calculateVisibles } from './calculateVisibles';
 
 
 describe('calculateVisibles', () => {
